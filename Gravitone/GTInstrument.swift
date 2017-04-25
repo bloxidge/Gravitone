@@ -66,9 +66,9 @@ class GTInstrument {
         squareSamplers["green"] = AKSampler()
         squareSamplers["blue"] = AKSampler()
         
-        squareSamplers["red"]!.loadWav("Sounds/Square/KickHard23")
-        squareSamplers["green"]!.loadWav("Sounds/Square/SNHard13")
-        squareSamplers["blue"]!.loadWav("Sounds/Square/HatTightNatV06")
+        try! squareSamplers["red"]!.loadWav("Sounds/Square/KickHard23")
+        try! squareSamplers["green"]!.loadWav("Sounds/Square/SNHard13")
+        try! squareSamplers["blue"]!.loadWav("Sounds/Square/HatTightNatV06")
         
         squareAudio = AKMixer(squareSamplers["red"]!, squareSamplers["green"]!, squareSamplers["blue"]!)
         squareAudio.volume = 0.7
@@ -83,9 +83,9 @@ class GTInstrument {
         circleSamplers["green"] = AKSampler()
         circleSamplers["blue"] = AKSampler()
         
-        circleSamplers["red"]!.loadWav("Sounds/Circle/BigDrone")
-        circleSamplers["green"]!.loadWav("Sounds/Circle/HiQBass")
-        circleSamplers["blue"]!.loadWav("Sounds/Circle/Portatone")
+        try! circleSamplers["red"]!.loadWav("Sounds/Circle/BigDrone")
+        try! circleSamplers["green"]!.loadWav("Sounds/Circle/HiQBass")
+        try! circleSamplers["blue"]!.loadWav("Sounds/Circle/Portatone")
         
         circleAudio = AKMixer(circleSamplers["red"]!, circleSamplers["green"]!, circleSamplers["blue"]!)
         circleAudio.volume = 1.0
@@ -100,9 +100,9 @@ class GTInstrument {
         triangleSamplers["green"] = AKSampler()
         triangleSamplers["blue"] = AKSampler()
         
-        triangleSamplers["red"]!.loadWav("Sounds/Triangle/DanceHook")
-        triangleSamplers["green"]!.loadWav("Sounds/Triangle/SquareLead")
-        triangleSamplers["blue"]!.loadWav("Sounds/Triangle/FunkyLead")
+        try! triangleSamplers["red"]!.loadWav("Sounds/Triangle/DanceHook")
+        try! triangleSamplers["green"]!.loadWav("Sounds/Triangle/SquareLead")
+        try! triangleSamplers["blue"]!.loadWav("Sounds/Triangle/FunkyLead")
         
         triangleAudio = AKMixer(triangleSamplers["red"]!, triangleSamplers["green"]!, triangleSamplers["blue"]!)
         triangleAudio.volume = 0.5
@@ -117,9 +117,9 @@ class GTInstrument {
         starSamplers["green"] = AKSampler()
         starSamplers["blue"] = AKSampler()
         
-        starSamplers["red"]!.loadWav("Sounds/Star/Stardust")
-        starSamplers["green"]!.loadWav("Sounds/Star/SunBell")
-        starSamplers["blue"]!.loadWav("Sounds/Star/CrystalEyes")
+        try! starSamplers["red"]!.loadWav("Sounds/Star/Stardust")
+        try! starSamplers["green"]!.loadWav("Sounds/Star/SunBell")
+        try! starSamplers["blue"]!.loadWav("Sounds/Star/CrystalEyes")
         
         starAudio = AKMixer(starSamplers["red"]!, starSamplers["green"]!, starSamplers["blue"]!)
         starAudio.volume = 0.5
@@ -184,7 +184,7 @@ class GTInstrument {
             case .quarter, .eighth: shift = octave*2
             }
             for sampler in currentSamplerArray.values {
-                sampler.play(noteNumber: pitchTable["C"]!+shift, velocity: 127, channel: 0)
+                sampler.play(noteNumber: MIDINoteNumber(pitchTable["C"]!+shift), velocity: 127, channel: 0)
             }
         case .triangle, .star:
             switch node.note! {
@@ -193,7 +193,7 @@ class GTInstrument {
             case .quarter, .eighth: shift = octave
             }
             for sampler in currentSamplerArray.values {
-                sampler.play(noteNumber: pitch+shift, velocity: 127, channel: 0)
+                sampler.play(noteNumber: MIDINoteNumber(pitch+shift), velocity: 127, channel: 0)
             }
         }
     }
